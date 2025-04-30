@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
      //    home:  HomePage(),
      // // home: LoginEmailScreen(),
      // //  home: RegisterEmail(),
-        // In your main.dart file, ensure you have routes set up:
+      // In your main.dart file, ensure you have routes set up:
 
 
 
@@ -40,3 +40,4 @@ class MyApp extends StatelessWidget {
     );
     }
 }
+
