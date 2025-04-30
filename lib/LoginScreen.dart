@@ -118,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
       }
     }
   }
-
+// credential add kren sirr
   String _getErrorMessage(FirebaseAuthException e) {
     switch (e.code) {
       case 'invalid-email':
