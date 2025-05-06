@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'AddItemScreen.dart';
 import 'DonationItems.dart';
 import 'HomePage.dart';
 
@@ -27,7 +28,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      home:  SplashScreen(),
+       // home:  SplashScreen(),
+      // home: addItem(),
+      home: AddItemScreen(),
+      // home: AddItemScreen(),
      // // home: TestLoginStallScreen(),
      //    home:  HomePage(),
      // // home: LoginEmailScreen(),

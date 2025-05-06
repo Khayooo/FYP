@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
+import 'package:firebase_database/firebase_database.dart';
+
 
 class RegisterNewUser extends StatefulWidget {
   const RegisterNewUser({super.key});
@@ -65,6 +67,8 @@ class _RegisterNewUserState extends State<RegisterNewUser>
     super.dispose();
   }
 
+
+
   Future<void> _register() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -76,10 +80,22 @@ class _RegisterNewUserState extends State<RegisterNewUser>
         password: _passwordController.text.trim(),
       );
 
+       final newUser = FirebaseAuth.instance.currentUser;
+        if (newUser != null) {
+      await FirebaseDatabase.instance.ref('users').child(newUser.uid).set({
+          'name': _nameController.text.trim(),
+          'email': _emailController.text.trim(),
+          'uid': newUser.uid,
+        });
+
+      }
+
       // Update user display name
       await FirebaseAuth.instance.currentUser?.updateDisplayName(
         _nameController.text.trim(),
       );
+
+
 
       if (mounted) {
         Navigator.pushReplacementNamed(context, '/home');
