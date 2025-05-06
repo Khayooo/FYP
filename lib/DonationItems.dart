@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fyp_donation/AddItemScreen.dart';
+import 'package:fyp_donation/HomePage.dart';
 import 'AccountScreen.dart';
+import 'AddItemScreen.dart';
+import 'HomePage.dart';
 import 'ItemDetailsScreen.dart';
 
 class DonationItems extends StatelessWidget {
@@ -177,6 +181,7 @@ class DonationItems extends StatelessWidget {
           showUnselectedLabels: true,
           elevation: 10,
           onTap: (index) {
+
             if (index == 0) {
               Navigator.pushReplacementNamed(context, '/home');
             } else if (index == 4) {
@@ -188,6 +193,7 @@ class DonationItems extends StatelessWidget {
           },
           items: const [
             BottomNavigationBarItem(
+
               icon: Icon(Icons.home_filled),
               label: "Home",
             ),
@@ -196,6 +202,7 @@ class DonationItems extends StatelessWidget {
               label: "Donations",
             ),
             BottomNavigationBarItem(
+
               icon: Icon(Icons.add),
               label: "Add",
             ),

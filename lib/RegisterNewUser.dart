@@ -80,15 +80,15 @@ class _RegisterNewUserState extends State<RegisterNewUser>
         password: _passwordController.text.trim(),
       );
 
-       final newUser = FirebaseAuth.instance.currentUser;
-        if (newUser != null) {
-      await FirebaseDatabase.instance.ref('users').child(newUser.uid).set({
-          'name': _nameController.text.trim(),
-          'email': _emailController.text.trim(),
-          'uid': newUser.uid,
-        });
-
+      final newUser = FirebaseAuth.instance.currentUser;
+      if (newUser != null) {
+        await FirebaseDatabase.instance.ref('users').child(newUser.uid).set({
+            'name': _nameController.text.trim(),
+            'email': _emailController.text.trim(),
+            'uid': newUser.uid,
+          });
       }
+
 
       // Update user display name
       await FirebaseAuth.instance.currentUser?.updateDisplayName(
@@ -98,7 +98,7 @@ class _RegisterNewUserState extends State<RegisterNewUser>
 
 
       if (mounted) {
-        Navigator.pushReplacementNamed(context, '/home');
+        Navigator.pop(context);
       }
     } on FirebaseAuthException catch (e) {
       if (mounted) {

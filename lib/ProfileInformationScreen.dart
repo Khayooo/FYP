@@ -28,10 +28,10 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController(text: widget.userData['name']);
-    _emailController = TextEditingController(text: widget.userData['email']);
-    _phoneController = TextEditingController(text: widget.userData['phone']);
-    _addressController = TextEditingController(text: widget.userData['address']);
+    _nameController = TextEditingController(text: widget.userData['name'] ?? "");
+    _emailController = TextEditingController(text: widget.userData['email']?? "");
+    _phoneController = TextEditingController(text: "");
+    _addressController = TextEditingController(text: "");
   }
 
   @override
@@ -153,6 +153,7 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
               label: "Full Name",
               icon: Icons.person,
               controller: _nameController,
+
             ),
             const SizedBox(height: 16),
             _buildFormField(
@@ -160,6 +161,7 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
               icon: Icons.email,
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
+
             ),
             const SizedBox(height: 16),
             _buildFormField(
@@ -212,12 +214,14 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
     required TextEditingController controller,
     TextInputType keyboardType = TextInputType.text,
     int maxLines = 1,
+    bool readOnly = false,
   }) {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
       maxLines: maxLines,
-      decoration: InputDecoration(
+      readOnly: readOnly,
+        decoration: InputDecoration(
         labelText: label,
         prefixIcon: Icon(icon, color: Colors.deepPurple),
         border: OutlineInputBorder(

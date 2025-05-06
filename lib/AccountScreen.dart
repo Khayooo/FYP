@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
+import 'LoginScreen.dart';
 import 'ProfileInformationScreen.dart';
 import 'SavedItemsScreen.dart';
 import 'HomePage.dart';
+import 'RegisterNewUser.dart';
 import 'DonationItems.dart';
+import 'HomePage.dart';
 
 
 class AccountScreen extends StatefulWidget {
@@ -150,6 +153,13 @@ class _AccountScreenState extends State<AccountScreen> with SingleTickerProvider
                   child: ElevatedButton(
                     onPressed: () {
                       // Handle logout
+                       Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ),
+                  );
+
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red.shade50,

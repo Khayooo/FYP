@@ -3,7 +3,8 @@ import 'package:flutter/scheduler.dart';
 import 'AccountScreen.dart';
 import 'ItemDetailsScreen.dart';
 import 'Notifications.dart';
-import 'DonationItems.dart'; // Add this import
+import 'AddItemScreen.dart';
+import 'DonationItems.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -48,6 +49,124 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  void _showAddItemDialog(BuildContext context) {
+    bool sellChecked = false;
+    bool donateChecked = false;
+    bool exchangeChecked = false;
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              title: const Text(
+                "Select Item Type",
+                style: TextStyle(
+                  color: Colors.deepPurple,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CheckboxListTile(
+                    title: const Text("Sell Product"),
+                    value: sellChecked,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        sellChecked = value!;
+                        if (sellChecked) {
+                          donateChecked = false;
+                          exchangeChecked = false;
+                        }
+                      });
+                    },
+                    activeColor: Colors.deepPurple,
+                    controlAffinity: ListTileControlAffinity.leading,
+                  ),
+                  CheckboxListTile(
+                    title: const Text("Donate Product"),
+                    value: donateChecked,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        donateChecked = value!;
+                        if (donateChecked) {
+                          sellChecked = false;
+                          exchangeChecked = false;
+                        }
+                      });
+                    },
+                    activeColor: Colors.deepPurple,
+                    controlAffinity: ListTileControlAffinity.leading,
+                  ),
+                  CheckboxListTile(
+                    title: const Text("Exchange Product"),
+                    value: exchangeChecked,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        exchangeChecked = value!;
+                        if (exchangeChecked) {
+                          sellChecked = false;
+                          donateChecked = false;
+                        }
+                      });
+                    },
+                    activeColor: Colors.deepPurple,
+                    controlAffinity: ListTileControlAffinity.leading,
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text(
+                    "Cancel",
+                    style: TextStyle(color: Colors.deepPurple),
+                  ),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    if (sellChecked || donateChecked || exchangeChecked) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AddItemScreen(
+                            itemType: sellChecked
+                                ? "Sell"
+                                : donateChecked
+                                ? "Donate"
+                                : "Exchange",
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text(
+                    "Continue",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -133,7 +252,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   const SizedBox(height: 28),
                   _buildSectionHeader("Featured Items", "See all"),
                   const SizedBox(height: 16),
-
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -248,7 +366,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       );
                     },
                   ),
-
                   const SizedBox(height: 32),
                   _buildSectionHeader("Browse by Category", "See all"),
                   const SizedBox(height: 16),
@@ -449,6 +566,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 context,
                 MaterialPageRoute(builder: (context) => const DonationItems()),
               );
+            } else if (index == 2) {
+              _showAddItemDialog(context);
             } else if (index == 4) {
               Navigator.push(
                 context,

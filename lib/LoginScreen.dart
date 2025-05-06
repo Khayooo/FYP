@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:firebase_auth/firebase_auth.dart';
-import 'HomePage.dart'; // Make sure this import points to your HomePage
 import 'RegisterNewUser.dart';
+import 'package:flutter/material.dart';
+import 'HomePage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
