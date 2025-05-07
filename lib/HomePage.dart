@@ -150,7 +150,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                 ? "Sell"
                                 : donateChecked
                                 ? "Donate"
-                                : "Exchange",
+                                : "Exchanges",
                           ),
                         ),
                       );
